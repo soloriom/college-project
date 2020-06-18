@@ -14,3 +14,10 @@ In the project directory, you can run:
 - Also constraints were added to the inputs, contraints vary depending on the input type.
 - A mock data can be set, going to `src/redux/reducers/students.ts` and setting `enableMock` variable to true; it's set to false by default
 
+## [Go to live project][url]
+
+&nbsp;
+&nbsp;
+&nbsp;
+
+[url]: https://codesandbox.io/s/github/soloriom/college-project
