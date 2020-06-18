@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Dashboard, Details, NewStudents, NavBar } from './Components';
+import { createBrowserHistory } from 'history';
+import { Router, Route, Switch, Redirect} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import './styles/studentsForm.scss';
 
-function App() {
+
+import { store } from './redux/store';
+
+const browserHistory = createBrowserHistory();
+
+const  App = (): JSX.Element => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <Provider store={store} > 
+    <Router history= {browserHistory}>
+        <NavBar history={browserHistory}/>
+      <Switch>
+        <Route exact path='/' render={()=><Redirect to="/dashboard"/>}/>
+        <Route exact path='/dashboard' component={Dashboard}/>
+        <Route exact path='/addStudent' component={NewStudents}/>
+        <Route exact path='/details' component={Details} />
+        <Route render={()=> <h1 style={{ position: 'fixed', left: '35%',  top:'30%' }}>ERROR 404 Page Not Found</h1>} />
+      </Switch>
+    </Router>
+   </Provider>
   );
 }
 

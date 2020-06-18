@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import './constants.scss';
+* {
+  box-sizing: border-box;
+
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0px;
+  padding: 0;
+
+}
+.NavBar{
+  overflow: hidden;
+  background-color: $dark;
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+  min-height: 50px;
+  border-radius: 0 0 5px 5px ;
+  margin-bottom: 20px;
+  .NavBarText{
+    color: $white;
+    position: absolute;
+    left: 100px;
+    top: 15px;
+  }
+
+}
+
+%inputConst{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid $ligthStrong;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  
+}
+
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: $ligth;
+  padding: 20px;
+  margin: 2vh  10vh 2vh;
+}
+
+.saveButton{
+  text-align: right;
+}
+
+input {
+  &[type=email]{
+    @extend %inputConst;
+  }
+  &[type=text]{
+    @extend %inputConst;
+  }
+  &[type=submit] {
+    background-color: $primary;
+    color: $white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+      background-color: $dark;
+      &:disabled{
+        background-color: $ligthStrong;
+    
+      }
+    }
+    &:disabled{
+      background-color: $ligthStrong;
+  
+    }
+  }
+}
+
+.studentsTable {
+  border-collapse: collapse;
+  width: 100%;
+  td{
+    border: 1px solid $ligthStrong;
+    padding: 8px;
+    color: $primary;
+  }
+  th{
+    border: 1px solid $ligthStrong;
+    padding: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $dark;
+    color: $white;
+  }
+  tr{
+    &:nth-child(even){
+      background-color: $ligth;
+    }
+    
+    &:hover {
+      td{
+        color: $white;
+      }
+      background-color: $primary;
+    }
+  }
+  
+}
+
+
+.addStudent {
+  display:block;
+  box-shadow: 2px 2px 3px gray;
+  position: fixed;
+  right: 10vh;
+  bottom: 10vh;
+  width:60px;
+  height:60px;
+  border-radius: 50%;
+  background-color: $ligthStrong;
+  font-size: 20px;
+  text-align:center;
+  text-decoration:none;
+  color: $white;
+  border: none;
+  &:hover{
+    background-color: $dark;
+  }
+  
+}
+
+.tooltip{
+
+  .tooltipText{
+    visibility: hidden;
+    width: 120px;
+    background-color: $dark;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    opacity: .8;
+    
+    /* Position the tooltip */
+    position: fixed;
+    right: 6vh;
+    bottom: 18vh;
+    z-index: 1;
+  }
+  &:hover{
+    .tooltipText{
+      visibility: visible;
+    }
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 60vh;
+  border-radius: 10px;
+  margin: 5vh auto 5vh auto;
+  &:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  .returnBtn{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: $white;
+    background-color: $ligthStrong;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;  
+    &:hover{
+      background-color: $dark;
+    }
+  }
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 200px;
+    max-height: 200px;
+    text-align: center;
+  }
+  label {
+    position: relative;
+    left: 10%;
+    display: inline-block;
+    text-align: left;
+    color: $dark;
+  }
+  p {
+    text-decoration: none;
+    text-align: center;
+    color: $primary;
+    
+  }
+}
