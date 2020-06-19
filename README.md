@@ -13,6 +13,8 @@ In the project directory, you can run:
 - All field are requried. 
 - Also constraints were added to the inputs, contraints vary depending on the input type.
 - A mock data can be set, going to `src/redux/reducers/students.ts` and setting `enableMock` variable to true; it's set to false by default
+- Redux logger is enabled, can be improve to work only on dev and not on prod. Not implemented at the moment.
+
 
 ## [Go to live project][url]
 

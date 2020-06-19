@@ -4,10 +4,74 @@ import * as Regex from "../utils/constants/regex";
 import { newStudent } from "../redux/actions";
 import { useDispatch,useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { IProps, Istudents,IRootState } from "../utils/constants/interfaces";
+import { IProps, Istudents,IRootState, IinputProps } from "../utils/constants/interfaces";
+import { InputCP } from "./index";
+
+const arrayInputs: Array<IinputProps> = [
+    {
+      label: "First Name",
+      type:"text",
+      name:"firstName",
+      value: "firstName",
+      placeHolder: "First name..."
+    },
+    {
+      type:"text",
+      label: "Last Name",
+      name:"lastName",
+      value: "lastName",
+      placeHolder: "Last name..."
+    },
+    {
+      label: "Address",
+      type:"text",
+      name:"street",
+      value: "street",
+      placeHolder: "Street name and number"
+    },
+    {
+      type:"text",
+      name:"city",
+      value: "city",
+      placeHolder: "City"
+    },
+    {
+      type:"text",
+      name:"state",
+      value: "state",
+      placeHolder: "State"
+    },
+    {
+      type:"text",
+      name:"zipcode",
+      value: "zipcode",
+      placeHolder: "Zipcode ##### (five digits )"
+    },
+    {
+      label: "Phone Number",
+      type:"text",
+      name:"phoneNumber",
+      value: "phoneNumber",
+      placeHolder: "Phone Number 7-16 digits..."
+    },
+    {
+      label: "Email",
+      type:"email",
+      name:"email",
+      value: "email",
+      placeHolder: "example@domain.com"
+    },
+    {
+      label: "GPA",
+      type:"text",
+      name:"gpa",
+      value: "gpa",
+      placeHolder: "from 1.0 to 4.0 ..."
+    }
+  ];
 
 
-const NewStudents: React.FC<IProps> = (props): JSX.Element  => {
+export const NewStudents: React.FC<IProps> = (props): JSX.Element  => {
 
   const [formData, setFormData] = useState<Istudents>({
     firstName: "",
@@ -26,39 +90,9 @@ const NewStudents: React.FC<IProps> = (props): JSX.Element  => {
   const dispatch = useDispatch();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputName = e.target.name;
 
-    switch (e.target.name) {
-      case "firstName":
-          setFormData({...formData, firstName: e.target.value})
-        break;
-      case "lastName":
-          setFormData({...formData, lastName: e.target.value})
-        break;
-      case "street":
-          setFormData({...formData, street: e.target.value})
-        break;
-      case "city":
-          setFormData({...formData, city: e.target.value})
-        break;
-      case "zipcode":
-          setFormData({...formData, zipcode: e.target.value})
-        break;
-      case "state":
-          setFormData({...formData, state: e.target.value})
-        break;
-      case "email":
-          setFormData({...formData, email: e.target.value})
-        break;
-      case "phoneNumber":
-          setFormData({...formData, phoneNumber: e.target.value})
-        break;
-      case "gpa":
-          setFormData({...formData, gpa: e.target.value})
-        break;
-    
-      default:
-        break;
-    }
+      setFormData({...formData, [inputName]: e.target.value })
   }
   
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,94 +150,32 @@ const NewStudents: React.FC<IProps> = (props): JSX.Element  => {
     props.history.replace("/dashboard");
   }
 
+  
+  const renderInputs= () => {
+    return(
+      arrayInputs.map( (item,i) => 
+          <InputCP 
+            key ={i}
+            label={item.label}
+            changeHandler={changeHandler}
+            type={item.type} 
+            name={item.name} 
+            value={formData[item.value]}
+            placeHolder={item.placeHolder}
+            />
+      )
+    )
+  }
+  
+
   return (
-    <div className="container">
+    <div className="inputContainer">
       <form onSubmit={submitHandler}>
-          <label> First Name 
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="firstName" 
-            value={formData.firstName}
-            placeholder=" First name..."
-            />
-          </label>
-          <label> Last Name 
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="lastName"  
-            value={formData.lastName}
-            placeholder="Last name..."
-            />
-          </label>
-          <label> Address 
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="street" 
-            value={formData.street}
-            placeholder="Street name and number"
-            />
-          </label>
-
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="city" 
-            value={formData.city}
-            placeholder="City"
-            /> 
-
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="state" 
-            value={formData.state}
-            placeholder=" State"
-            /> 
-
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="zipcode" 
-            value={formData.zipcode}
-            placeholder=" Zipcode ##### (five digits ) "
-            /> 
-
-          <label> Phone Number 
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="phoneNumber" 
-            value={formData.phoneNumber}
-            placeholder=" Phone Number 7-16 digits..."
-            /> 
-          </label>
-          <label> Email
-            <input 
-            onChange={changeHandler} 
-            type="email" 
-            name="email" 
-            value={formData.email}
-            placeholder=" example@domain.com"
-            /> 
-          </label>
-          <label> GPA 
-            <input 
-            onChange={changeHandler} 
-            type="text" 
-            name="gpa" 
-            value={formData.gpa}
-            placeholder=" from 1.0 to 4.0 ..."
-            /> 
-          </label>
-          <div className="saveButton">
-            <input disabled={isDisabled} type="submit" value="Save Student" />
-          </div>
+        {renderInputs()}
+        <div className="saveButton">
+          <input disabled={isDisabled} type="submit" value="Save Student" />
+        </div>
       </form>
     </div>
   );
 }
-
-export { NewStudents };

@@ -35,3 +35,12 @@ export interface Itype{
  readonly PURGE: string;
  readonly STUDENT_DETAILS: string;
 }
+
+export interface IinputProps {
+  changeHandler?: any,
+  label?: string,
+  type:string,
+  name:string,
+  value:string,
+  placeHolder:string,
+}
